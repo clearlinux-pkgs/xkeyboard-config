@@ -4,7 +4,7 @@
 #
 Name     : xkeyboard-config
 Version  : 2.17
-Release  : 10
+Release  : 11
 URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.17.tar.gz
 Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.17.tar.gz
 Summary  : X Keyboard configuration data
