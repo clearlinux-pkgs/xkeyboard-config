@@ -6,7 +6,7 @@
 #
 Name     : xkeyboard-config
 Version  : 2.20
-Release  : 15
+Release  : 16
 URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.20.tar.bz2
 Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.20.tar.bz2
 Source99 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.20.tar.bz2.sig
@@ -79,8 +79,11 @@ locales components for the xkeyboard-config package.
 %setup -q -n xkeyboard-config-2.20
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1487982969
+export SOURCE_DATE_EPOCH=1499532307
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -88,11 +91,11 @@ make V=1  %{?_smp_mflags}
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1487982969
+export SOURCE_DATE_EPOCH=1499532307
 rm -rf %{buildroot}
 %make_install
 %find_lang xkeyboard-config
