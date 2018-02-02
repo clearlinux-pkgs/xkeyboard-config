@@ -6,7 +6,7 @@
 #
 Name     : xkeyboard-config
 Version  : 2.22
-Release  : 18
+Release  : 19
 URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.22.tar.bz2
 Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.22.tar.bz2
 Source99 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.22.tar.bz2.sig
