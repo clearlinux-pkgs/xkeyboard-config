@@ -6,10 +6,10 @@
 #
 Name     : xkeyboard-config
 Version  : 2.24
-Release  : 21
-URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.24.tar.bz2
-Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.24.tar.bz2
-Source99 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.24.tar.bz2.sig
+Release  : 22
+URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.24.tar.gz
+Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.24.tar.gz
+Source99 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.24.tar.gz.sig
 Summary  : X Keyboard configuration data
 Group    : Development/Tools
 License  : ICU
@@ -93,7 +93,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530280888
+export SOURCE_DATE_EPOCH=1533053971
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -105,7 +105,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1530280888
+export SOURCE_DATE_EPOCH=1533053971
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/doc/xkeyboard-config
 cp COPYING %{buildroot}/usr/share/doc/xkeyboard-config/COPYING
