@@ -5,18 +5,18 @@
 # Source0 file verified with key 0x0661D98FC933A145 (sergey.udaltsov@gmail.com)
 #
 Name     : xkeyboard-config
-Version  : 2.24
-Release  : 22
-URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.24.tar.gz
-Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.24.tar.gz
-Source99 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.24.tar.gz.sig
-Summary  : X Keyboard configuration data
+Version  : 2.26
+Release  : 23
+URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.26.tar.bz2
+Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.26.tar.bz2
+Source99 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.26.tar.bz2.sig
+Summary  : X keyboard configuration files
 Group    : Development/Tools
 License  : ICU
-Requires: xkeyboard-config-data
-Requires: xkeyboard-config-license
-Requires: xkeyboard-config-locales
-Requires: xkeyboard-config-man
+Requires: xkeyboard-config-data = %{version}-%{release}
+Requires: xkeyboard-config-license = %{version}-%{release}
+Requires: xkeyboard-config-locales = %{version}-%{release}
+Requires: xkeyboard-config-man = %{version}-%{release}
 BuildRequires : gettext
 BuildRequires : intltool
 BuildRequires : libxslt-bin
@@ -54,8 +54,8 @@ data components for the xkeyboard-config package.
 %package dev
 Summary: dev components for the xkeyboard-config package.
 Group: Development
-Requires: xkeyboard-config-data
-Provides: xkeyboard-config-devel
+Requires: xkeyboard-config-data = %{version}-%{release}
+Provides: xkeyboard-config-devel = %{version}-%{release}
 
 %description dev
 dev components for the xkeyboard-config package.
@@ -86,14 +86,14 @@ man components for the xkeyboard-config package.
 
 
 %prep
-%setup -q -n xkeyboard-config-2.24
+%setup -q -n xkeyboard-config-2.26
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1533053971
+export SOURCE_DATE_EPOCH=1549291339
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -105,10 +105,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1533053971
+export SOURCE_DATE_EPOCH=1549291339
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/xkeyboard-config
-cp COPYING %{buildroot}/usr/share/doc/xkeyboard-config/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
+cp COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/COPYING
 %make_install
 %find_lang xkeyboard-config
 
@@ -408,11 +408,11 @@ cp COPYING %{buildroot}/usr/share/doc/xkeyboard-config/COPYING
 /usr/lib64/pkgconfig/xkeyboard-config.pc
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/xkeyboard-config/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/xkeyboard-config/COPYING
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man7/xkeyboard-config.7
 
 %files locales -f xkeyboard-config.lang
