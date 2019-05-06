@@ -6,7 +6,7 @@
 #
 Name     : xkeyboard-config
 Version  : 2.26
-Release  : 23
+Release  : 24
 URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.26.tar.bz2
 Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.26.tar.bz2
 Source99 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.26.tar.bz2.sig
@@ -56,6 +56,7 @@ Summary: dev components for the xkeyboard-config package.
 Group: Development
 Requires: xkeyboard-config-data = %{version}-%{release}
 Provides: xkeyboard-config-devel = %{version}-%{release}
+Requires: xkeyboard-config = %{version}-%{release}
 
 %description dev
 dev components for the xkeyboard-config package.
@@ -93,7 +94,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1549291339
+export SOURCE_DATE_EPOCH=1557106257
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -105,7 +113,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1549291339
+export SOURCE_DATE_EPOCH=1557106257
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
 cp COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/COPYING
