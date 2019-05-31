@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x0661D98FC933A145 (sergey.udaltsov@gmail.com)
 #
 Name     : xkeyboard-config
-Version  : 2.26
-Release  : 24
-URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.26.tar.bz2
-Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.26.tar.bz2
-Source99 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.26.tar.bz2.sig
+Version  : 2.27
+Release  : 25
+URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.27.tar.bz2
+Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.27.tar.bz2
+Source99 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.27.tar.bz2.sig
 Summary  : X keyboard configuration files
 Group    : Development/Tools
 License  : ICU
@@ -18,7 +18,6 @@ Requires: xkeyboard-config-license = %{version}-%{release}
 Requires: xkeyboard-config-locales = %{version}-%{release}
 Requires: xkeyboard-config-man = %{version}-%{release}
 BuildRequires : gettext
-BuildRequires : intltool
 BuildRequires : libxslt-bin
 BuildRequires : perl(XML::Parser)
 BuildRequires : pkgconfig(fontsproto)
@@ -57,6 +56,7 @@ Group: Development
 Requires: xkeyboard-config-data = %{version}-%{release}
 Provides: xkeyboard-config-devel = %{version}-%{release}
 Requires: xkeyboard-config = %{version}-%{release}
+Requires: xkeyboard-config = %{version}-%{release}
 
 %description dev
 dev components for the xkeyboard-config package.
@@ -87,14 +87,14 @@ man components for the xkeyboard-config package.
 
 
 %prep
-%setup -q -n xkeyboard-config-2.26
+%setup -q -n xkeyboard-config-2.27
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1557106257
+export SOURCE_DATE_EPOCH=1559327421
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -113,7 +113,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1557106257
+export SOURCE_DATE_EPOCH=1559327421
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
 cp COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/COPYING
@@ -206,6 +206,7 @@ cp COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/COPYING
 /usr/share/X11/xkb/rules/evdev.xml
 /usr/share/X11/xkb/rules/xfree98
 /usr/share/X11/xkb/rules/xkb.dtd
+/usr/share/X11/xkb/rules/xkb.its
 /usr/share/X11/xkb/symbols/af
 /usr/share/X11/xkb/symbols/al
 /usr/share/X11/xkb/symbols/altwin
