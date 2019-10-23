@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x0661D98FC933A145 (sergey.udaltsov@gmail.com)
 #
 Name     : xkeyboard-config
-Version  : 2.27
-Release  : 25
-URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.27.tar.bz2
-Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.27.tar.bz2
-Source99 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.27.tar.bz2.sig
+Version  : 2.28
+Release  : 26
+URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.28.tar.bz2
+Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.28.tar.bz2
+Source1 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.28.tar.bz2.sig
 Summary  : X keyboard configuration files
 Group    : Development/Tools
 License  : ICU
@@ -31,6 +31,7 @@ BuildRequires : pkgconfig(xorg-server)
 BuildRequires : pkgconfig(xproto)
 BuildRequires : pkgconfig(xtrans)
 BuildRequires : sed
+BuildRequires : util-linux
 
 %description
 X Keyboard Extension
@@ -87,14 +88,16 @@ man components for the xkeyboard-config package.
 
 
 %prep
-%setup -q -n xkeyboard-config-2.27
+%setup -q -n xkeyboard-config-2.28
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1559327421
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1571843133
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -106,17 +109,17 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1559327421
+export SOURCE_DATE_EPOCH=1571843133
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
-cp COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/COPYING
+cp %{_builddir}/xkeyboard-config-2.28/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
 %make_install
 %find_lang xkeyboard-config
 
@@ -418,7 +421,7 @@ cp COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/xkeyboard-config/COPYING
+/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
 
 %files man
 %defattr(0644,root,root,0755)
