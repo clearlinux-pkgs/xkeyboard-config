@@ -6,11 +6,11 @@
 #
 Name     : xkeyboard-config
 Version  : 2.28
-Release  : 26
+Release  : 27
 URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.28.tar.bz2
 Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.28.tar.bz2
-Source1 : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.28.tar.bz2.sig
-Summary  : X keyboard configuration files
+Source1  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.28.tar.bz2.sig
+Summary  : X Keyboard configuration data
 Group    : Development/Tools
 License  : ICU
 Requires: xkeyboard-config-data = %{version}-%{release}
@@ -57,7 +57,6 @@ Group: Development
 Requires: xkeyboard-config-data = %{version}-%{release}
 Provides: xkeyboard-config-devel = %{version}-%{release}
 Requires: xkeyboard-config = %{version}-%{release}
-Requires: xkeyboard-config = %{version}-%{release}
 
 %description dev
 dev components for the xkeyboard-config package.
@@ -89,21 +88,21 @@ man components for the xkeyboard-config package.
 
 %prep
 %setup -q -n xkeyboard-config-2.28
+cd %{_builddir}/xkeyboard-config-2.28
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571843133
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1605030146
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -113,10 +112,10 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1571843133
+export SOURCE_DATE_EPOCH=1605030146
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
 cp %{_builddir}/xkeyboard-config-2.28/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
