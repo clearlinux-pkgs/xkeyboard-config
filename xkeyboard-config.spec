@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x0661D98FC933A145 (sergey.udaltsov@gmail.com)
 #
 Name     : xkeyboard-config
-Version  : 2.28
-Release  : 27
-URL      : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.28.tar.bz2
-Source0  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.28.tar.bz2
-Source1  : http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.28.tar.bz2.sig
+Version  : 2.31
+Release  : 28
+URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.31.tar.gz
+Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.31.tar.gz
+Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.31.tar.gz.sig
 Summary  : X Keyboard configuration data
 Group    : Development/Tools
 License  : ICU
@@ -31,7 +31,6 @@ BuildRequires : pkgconfig(xorg-server)
 BuildRequires : pkgconfig(xproto)
 BuildRequires : pkgconfig(xtrans)
 BuildRequires : sed
-BuildRequires : util-linux
 
 %description
 X Keyboard Extension
@@ -87,15 +86,15 @@ man components for the xkeyboard-config package.
 
 
 %prep
-%setup -q -n xkeyboard-config-2.28
-cd %{_builddir}/xkeyboard-config-2.28
+%setup -q -n xkeyboard-config-2.31
+cd %{_builddir}/xkeyboard-config-2.31
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1605030146
+export SOURCE_DATE_EPOCH=1609357037
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -115,10 +114,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1605030146
+export SOURCE_DATE_EPOCH=1609357037
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
-cp %{_builddir}/xkeyboard-config-2.28/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
+cp %{_builddir}/xkeyboard-config-2.31/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
 %make_install
 %find_lang xkeyboard-config
 
@@ -135,6 +134,7 @@ cp %{_builddir}/xkeyboard-config-2.28/COPYING %{buildroot}/usr/share/package-lic
 /usr/share/X11/xkb/compat/iso9995
 /usr/share/X11/xkb/compat/japan
 /usr/share/X11/xkb/compat/ledcaps
+/usr/share/X11/xkb/compat/ledcompose
 /usr/share/X11/xkb/compat/lednum
 /usr/share/X11/xkb/compat/ledscroll
 /usr/share/X11/xkb/compat/level5
@@ -208,7 +208,6 @@ cp %{_builddir}/xkeyboard-config-2.28/COPYING %{buildroot}/usr/share/package-lic
 /usr/share/X11/xkb/rules/evdev.xml
 /usr/share/X11/xkb/rules/xfree98
 /usr/share/X11/xkb/rules/xkb.dtd
-/usr/share/X11/xkb/rules/xkb.its
 /usr/share/X11/xkb/symbols/af
 /usr/share/X11/xkb/symbols/al
 /usr/share/X11/xkb/symbols/altwin
@@ -244,6 +243,7 @@ cp %{_builddir}/xkeyboard-config-2.28/COPYING %{buildroot}/usr/share/package-lic
 /usr/share/X11/xkb/symbols/dk
 /usr/share/X11/xkb/symbols/dz
 /usr/share/X11/xkb/symbols/ee
+/usr/share/X11/xkb/symbols/eg
 /usr/share/X11/xkb/symbols/empty
 /usr/share/X11/xkb/symbols/epo
 /usr/share/X11/xkb/symbols/es
@@ -275,6 +275,7 @@ cp %{_builddir}/xkeyboard-config-2.28/COPYING %{buildroot}/usr/share/package-lic
 /usr/share/X11/xkb/symbols/it
 /usr/share/X11/xkb/symbols/jolla_vndr/sbj
 /usr/share/X11/xkb/symbols/jp
+/usr/share/X11/xkb/symbols/jv
 /usr/share/X11/xkb/symbols/ke
 /usr/share/X11/xkb/symbols/keypad
 /usr/share/X11/xkb/symbols/kg
@@ -285,6 +286,7 @@ cp %{_builddir}/xkeyboard-config-2.28/COPYING %{buildroot}/usr/share/package-lic
 /usr/share/X11/xkb/symbols/la
 /usr/share/X11/xkb/symbols/latam
 /usr/share/X11/xkb/symbols/latin
+/usr/share/X11/xkb/symbols/level2
 /usr/share/X11/xkb/symbols/level3
 /usr/share/X11/xkb/symbols/level5
 /usr/share/X11/xkb/symbols/lk

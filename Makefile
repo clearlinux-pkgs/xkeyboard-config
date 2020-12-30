@@ -1,5 +1,5 @@
 PKG_NAME := xkeyboard-config
-URL = http://xorg.freedesktop.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.28.tar.bz2
+URL = https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.31.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
