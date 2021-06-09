@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x0661D98FC933A145 (sergey.udaltsov@gmail.com)
 #
 Name     : xkeyboard-config
-Version  : 2.32
-Release  : 29
-URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.32.tar.gz
-Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.32.tar.gz
-Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.32.tar.gz.sig
+Version  : 2.33
+Release  : 30
+URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.33.tar.gz
+Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.33.tar.gz
+Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.33.tar.gz.sig
 Summary  : X Keyboard configuration data
 Group    : Development/Tools
 License  : ICU
@@ -87,15 +87,15 @@ man components for the xkeyboard-config package.
 
 
 %prep
-%setup -q -n xkeyboard-config-2.32
-cd %{_builddir}/xkeyboard-config-2.32
+%setup -q -n xkeyboard-config-2.33
+cd %{_builddir}/xkeyboard-config-2.33
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1613614702
+export SOURCE_DATE_EPOCH=1623201443
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -115,10 +115,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1613614702
+export SOURCE_DATE_EPOCH=1623201443
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
-cp %{_builddir}/xkeyboard-config-2.32/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
+cp %{_builddir}/xkeyboard-config-2.33/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
 %make_install
 %find_lang xkeyboard-config
 
