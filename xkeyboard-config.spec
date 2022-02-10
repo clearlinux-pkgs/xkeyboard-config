@@ -5,12 +5,12 @@
 # Source0 file verified with key 0x0661D98FC933A145 (sergey.udaltsov@gmail.com)
 #
 Name     : xkeyboard-config
-Version  : 2.34
-Release  : 31
-URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.34.tar.gz
-Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.34.tar.gz
-Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.34.tar.gz.sig
-Summary  : X Keyboard configuration data
+Version  : 2.35.1
+Release  : 32
+URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.35.1.tar.xz
+Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.35.1.tar.xz
+Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.35.1.tar.xz.sig
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : ICU
 Requires: xkeyboard-config-data = %{version}-%{release}
@@ -18,12 +18,9 @@ Requires: xkeyboard-config-license = %{version}-%{release}
 Requires: xkeyboard-config-locales = %{version}-%{release}
 Requires: xkeyboard-config-man = %{version}-%{release}
 BuildRequires : buildreq-meson
-BuildRequires : gettext
 BuildRequires : libxslt-bin
-BuildRequires : perl(XML::Parser)
 BuildRequires : pkgconfig(fontsproto)
 BuildRequires : pkgconfig(inputproto)
-BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xcb)
 BuildRequires : pkgconfig(xextproto)
 BuildRequires : pkgconfig(xkbcomp)
@@ -31,7 +28,6 @@ BuildRequires : pkgconfig(xorg-macros)
 BuildRequires : pkgconfig(xorg-server)
 BuildRequires : pkgconfig(xproto)
 BuildRequires : pkgconfig(xtrans)
-BuildRequires : sed
 
 %description
 X Keyboard Extension
@@ -87,15 +83,15 @@ man components for the xkeyboard-config package.
 
 
 %prep
-%setup -q -n xkeyboard-config-2.34
-cd %{_builddir}/xkeyboard-config-2.34
+%setup -q -n xkeyboard-config-2.35.1
+cd %{_builddir}/xkeyboard-config-2.35.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1633367419
+export SOURCE_DATE_EPOCH=1644451806
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -104,22 +100,13 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
-%configure --disable-static
-make  %{?_smp_mflags}
-
-%check
-export LANG=C.UTF-8
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-make %{?_smp_mflags} check
+CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
+ninja -v -C builddir
 
 %install
-export SOURCE_DATE_EPOCH=1633367419
-rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
-cp %{_builddir}/xkeyboard-config-2.34/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
-%make_install
+cp %{_builddir}/xkeyboard-config-2.35.1/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
+DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang xkeyboard-config
 
 %files
@@ -209,6 +196,9 @@ cp %{_builddir}/xkeyboard-config-2.34/COPYING %{buildroot}/usr/share/package-lic
 /usr/share/X11/xkb/rules/evdev.xml
 /usr/share/X11/xkb/rules/xfree98
 /usr/share/X11/xkb/rules/xkb.dtd
+/usr/share/X11/xkb/rules/xorg
+/usr/share/X11/xkb/rules/xorg.lst
+/usr/share/X11/xkb/rules/xorg.xml
 /usr/share/X11/xkb/symbols/af
 /usr/share/X11/xkb/symbols/al
 /usr/share/X11/xkb/symbols/altwin
@@ -419,7 +409,7 @@ cp %{_builddir}/xkeyboard-config-2.34/COPYING %{buildroot}/usr/share/package-lic
 
 %files dev
 %defattr(-,root,root,-)
-/usr/lib64/pkgconfig/xkeyboard-config.pc
+/usr/share/pkgconfig/xkeyboard-config.pc
 
 %files license
 %defattr(0644,root,root,0755)
