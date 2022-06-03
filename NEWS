@@ -1,4 +1,5 @@
-2.35.1	Arabic translation added to LINGUAS
+2.36	120 commits (most: Benno Schulenberg)
+	Translations updated
 2.35	45 commits
 	Dropping autotools, only meson now
 	Translations updated

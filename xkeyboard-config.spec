@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x0661D98FC933A145 (sergey.udaltsov@gmail.com)
 #
 Name     : xkeyboard-config
-Version  : 2.35.1
-Release  : 32
-URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.35.1.tar.xz
-Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.35.1.tar.xz
-Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.35.1.tar.xz.sig
+Version  : 2.36
+Release  : 33
+URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.36.tar.xz
+Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.36.tar.xz
+Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.36.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : ICU
@@ -83,15 +83,15 @@ man components for the xkeyboard-config package.
 
 
 %prep
-%setup -q -n xkeyboard-config-2.35.1
-cd %{_builddir}/xkeyboard-config-2.35.1
+%setup -q -n xkeyboard-config-2.36
+cd %{_builddir}/xkeyboard-config-2.36
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1644451806
+export SOURCE_DATE_EPOCH=1654276468
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -105,7 +105,7 @@ ninja -v -C builddir
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
-cp %{_builddir}/xkeyboard-config-2.35.1/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
+cp %{_builddir}/xkeyboard-config-2.36/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang xkeyboard-config
 
@@ -196,9 +196,6 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/share/X11/xkb/rules/evdev.xml
 /usr/share/X11/xkb/rules/xfree98
 /usr/share/X11/xkb/rules/xkb.dtd
-/usr/share/X11/xkb/rules/xorg
-/usr/share/X11/xkb/rules/xorg.lst
-/usr/share/X11/xkb/rules/xorg.xml
 /usr/share/X11/xkb/symbols/af
 /usr/share/X11/xkb/symbols/al
 /usr/share/X11/xkb/symbols/altwin
@@ -212,6 +209,7 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/share/X11/xkb/symbols/bd
 /usr/share/X11/xkb/symbols/be
 /usr/share/X11/xkb/symbols/bg
+/usr/share/X11/xkb/symbols/bqn
 /usr/share/X11/xkb/symbols/br
 /usr/share/X11/xkb/symbols/brai
 /usr/share/X11/xkb/symbols/bt
@@ -266,7 +264,6 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/share/X11/xkb/symbols/it
 /usr/share/X11/xkb/symbols/jolla_vndr/sbj
 /usr/share/X11/xkb/symbols/jp
-/usr/share/X11/xkb/symbols/jv
 /usr/share/X11/xkb/symbols/ke
 /usr/share/X11/xkb/symbols/keypad
 /usr/share/X11/xkb/symbols/kg
