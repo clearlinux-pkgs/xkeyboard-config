@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x0661D98FC933A145 (sergey.udaltsov@gmail.com)
 #
 Name     : xkeyboard-config
-Version  : 2.36
-Release  : 33
-URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.36.tar.xz
-Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.36.tar.xz
-Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.36.tar.xz.sig
+Version  : 2.37
+Release  : 34
+URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.37.tar.xz
+Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.37.tar.xz
+Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.37.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : ICU
@@ -83,15 +83,15 @@ man components for the xkeyboard-config package.
 
 
 %prep
-%setup -q -n xkeyboard-config-2.36
-cd %{_builddir}/xkeyboard-config-2.36
+%setup -q -n xkeyboard-config-2.37
+cd %{_builddir}/xkeyboard-config-2.37
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1654276468
+export SOURCE_DATE_EPOCH=1664927852
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -105,7 +105,7 @@ ninja -v -C builddir
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
-cp %{_builddir}/xkeyboard-config-2.36/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
+cp %{_builddir}/xkeyboard-config-%{version}/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang xkeyboard-config
 
