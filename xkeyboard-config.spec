@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x0661D98FC933A145 (sergey.udaltsov@gmail.com)
 #
 Name     : xkeyboard-config
-Version  : 2.37
-Release  : 34
-URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.37.tar.xz
-Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.37.tar.xz
-Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.37.tar.xz.sig
+Version  : 2.38
+Release  : 35
+URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.38.tar.xz
+Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.38.tar.xz
+Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.38.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : ICU
@@ -28,6 +28,9 @@ BuildRequires : pkgconfig(xorg-macros)
 BuildRequires : pkgconfig(xorg-server)
 BuildRequires : pkgconfig(xproto)
 BuildRequires : pkgconfig(xtrans)
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 X Keyboard Extension
@@ -83,29 +86,29 @@ man components for the xkeyboard-config package.
 
 
 %prep
-%setup -q -n xkeyboard-config-2.37
-cd %{_builddir}/xkeyboard-config-2.37
+%setup -q -n xkeyboard-config-2.38
+cd %{_builddir}/xkeyboard-config-2.38
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1664927852
+export SOURCE_DATE_EPOCH=1675710091
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
 ninja -v -C builddir
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
-cp %{_builddir}/xkeyboard-config-%{version}/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
+cp %{_builddir}/xkeyboard-config-%{version}/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423 || :
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang xkeyboard-config
 
