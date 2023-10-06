@@ -6,14 +6,14 @@
 # Source0 file verified with key 0x0661D98FC933A145 (sergey.udaltsov@gmail.com)
 #
 Name     : xkeyboard-config
-Version  : 2.39
-Release  : 36
-URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.39.tar.xz
-Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.39.tar.xz
-Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.39.tar.xz.sig
+Version  : 2.40
+Release  : 37
+URL      : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.40.tar.xz
+Source0  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.40.tar.xz
+Source1  : https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.40.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
-License  : ICU
+License  : MIT
 Requires: xkeyboard-config-data = %{version}-%{release}
 Requires: xkeyboard-config-license = %{version}-%{release}
 Requires: xkeyboard-config-locales = %{version}-%{release}
@@ -87,10 +87,10 @@ man components for the xkeyboard-config package.
 
 
 %prep
-%setup -q -n xkeyboard-config-2.39
-cd %{_builddir}/xkeyboard-config-2.39
+%setup -q -n xkeyboard-config-2.40
+cd %{_builddir}/xkeyboard-config-2.40
 pushd ..
-cp -a xkeyboard-config-2.39 buildavx2
+cp -a xkeyboard-config-2.40 buildavx2
 popd
 
 %build
@@ -98,23 +98,50 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1686674630
+export SOURCE_DATE_EPOCH=1696605405
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
+meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddir
 ninja -v -C builddir
 CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -O3" CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 " LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3" meson --libdir=lib64 --prefix=/usr --buildtype=plain   builddiravx2
 ninja -v -C builddiravx2
 
+%check
+export LANG=C.UTF-8
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
+meson test -C builddir --print-errorlogs
+
 %install
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 mkdir -p %{buildroot}/usr/share/package-licenses/xkeyboard-config
-cp %{_builddir}/xkeyboard-config-%{version}/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423 || :
+cp %{_builddir}/xkeyboard-config-%{version}/COPYING %{buildroot}/usr/share/package-licenses/xkeyboard-config/dd9f81509e03c4471c42955b6f810e27748c019f || :
 DESTDIR=%{buildroot}-v3 ninja -C builddiravx2 install
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang xkeyboard-config
@@ -309,7 +336,6 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/share/X11/xkb/symbols/macintosh_vndr/pt
 /usr/share/X11/xkb/symbols/macintosh_vndr/se
 /usr/share/X11/xkb/symbols/macintosh_vndr/us
-/usr/share/X11/xkb/symbols/mao
 /usr/share/X11/xkb/symbols/md
 /usr/share/X11/xkb/symbols/me
 /usr/share/X11/xkb/symbols/mk
@@ -328,6 +354,7 @@ DESTDIR=%{buildroot} ninja -C builddir install
 /usr/share/X11/xkb/symbols/nokia_vndr/rx-51
 /usr/share/X11/xkb/symbols/nokia_vndr/su-8w
 /usr/share/X11/xkb/symbols/np
+/usr/share/X11/xkb/symbols/nz
 /usr/share/X11/xkb/symbols/olpc
 /usr/share/X11/xkb/symbols/parens
 /usr/share/X11/xkb/symbols/pc
@@ -422,7 +449,7 @@ DESTDIR=%{buildroot} ninja -C builddir install
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/xkeyboard-config/40f6d7c0dba74ddd10663dfa50c2659cbe251423
+/usr/share/package-licenses/xkeyboard-config/dd9f81509e03c4471c42955b6f810e27748c019f
 
 %files man
 %defattr(0644,root,root,0755)
